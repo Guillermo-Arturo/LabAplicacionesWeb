@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3> CRUD vue.js </h3>
+<div>
+    <form id="app" @submit="created" method="post">
+        <p>
+            <label for="codigo">Codigo de producto: </label>
+            <input type="number" name="codigo" id="code" v-model="codigo">
+        </p>
+        <p>
+            <label for="nombre">Nombre del producto: </label>
+            <input type="text" name="nombre" id="name" v-model="nombre">
+        </p>
+        <p>
+            <label for="costo">Precio del producto: </label>
+            <input type="number" name="costo" id="cost" v-model="costo">
+        </p>
+        <p>
+            <label for="existencia">Existencias en almacen: </label>
+            <input type="number" name="existencia" id="exist" v-model="existencia">
+        </p>
+    
+        <p>
+            <input type="submit" value="Submit">  
+        </p>
+    </form>
+</div>
+
+<script src="js/vue.js"></script>
+<script>
+ const app = new Vue(
+    {
+     el: '#app',
+     data: {
+        products: []
+     }, 
+     created() {
+        fetch('http://localhost:8080/api/products')
+        .then(response => response.json())
+        .then(json => {
+            this.products = json
+        })
+     }
+ })
+</script>
+
+</body>
+</html>
+
+
